@@ -10,7 +10,10 @@ class AdminController extends Controller
     public function __construct() {
         $this->middleware('auth', ['except'=>[
             'login',
-            'register']]);
+            'loginAction',
+            'register',
+            'registerAction'
+            ]]);
     }
 
 
@@ -19,8 +22,22 @@ class AdminController extends Controller
         echo 'admin';
     }
 
-    public function login() {
-        echo 'login';
+    public function login(Request $request) {
+        return view('admin/login', [
+            'error' => $request->session()->get('error')
+        ]);
+    }
+
+    public function loginAction(Request $request) {
+        $creds = $request->only('email', 'password');
+        if(Auth::attempt($creds)) {
+            return redirect('/admin');
+        } else {
+            $request->session()->flash('error', 'E-mail e/ou senha não conferem.');
+            return redirect('/admin/login');
+        
+        }
+
     }
 
     public function register() {
