@@ -37,6 +37,28 @@ header {
     background-color: #FFF;
     padding: 0 10px;
 }
+header ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+header li {
+    border-bottom: 2px solid #FFF;
+}
+header li a {
+    display: block;
+    padding: 19px;
+    text-decoration: none;
+    color: #000;
+}
+header li:hover {
+    border-bottom: 2px solid #CCC;
+}
+header li.active {
+    border-bottom: 2px solid #000;
+}
+
 
 table {
     margin: 10px;
@@ -52,4 +74,77 @@ table td {
     text-align:left;
     padding: 10px;
     border-bottom: 1px solid #CCC;
+}
+.preheader {
+    background-color:#CCC ;
+    padding: 10px 20px;
+    border-bottom: 1px solid #DDD;
+}
+
+.area {
+    display: flex;
+    flex: 1;
+
+}
+
+.area .leftside {
+flex: 1;
+border-right:1px solid #CCC;
+
+}
+
+.area .rightside {
+margin: 0 auto;
+}
+
+.area .rightside iframe {
+width: 300px;
+height: 550px;
+border: 10px solid #000;
+border-radius: 20px;
+margin: 20px;
+}
+
+.bigbutton {
+    display: block;
+    margin: 20px;
+    padding: 15px;
+    background-color:#CCC;
+    border-radius: 10px;
+    color: #000;
+    text-align:center;
+    text-decoration: none;
+}
+.bigbutton:hover {
+    background-color: #AAA;
+}
+
+#links {
+  padding: 0;
+  list-style: none;
+  margin: 20px;
+
+}
+
+.link--item {
+    display: flex;
+    background-color: #FFF;
+    margin-bottom:20px ;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+    box-shadow: 0px 2px 2px #CCC;
+}
+.link--item-order {
+    cursor:move;
+    margin-right: 10px;
+}
+.link--item-info {
+    flex:1;
+}
+.link--item-title {
+    font-weight: bold;
+}
+.link--item-buttons a:hover {
+    text-decoration: underline;
 }
