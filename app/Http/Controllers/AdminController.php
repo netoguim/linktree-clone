@@ -288,6 +288,39 @@ public function pageLinks($slug) {
 
     }
 
+    public function delLink($slug, $linkid) {
+        $user = Auth::user();
+        $page = Page::where('id_user', $user->id)
+            ->where('slug', $slug)
+            ->first();
+
+            if($page) {
+              $link = Link::where('id_page', $page->id)
+              ->where('id', $linkid)
+              ->first();
+              
+              if($link) {
+                  $link->delete();
+
+                  //corrigindo as posições 
+                    $allLinks = Link::where('id_page', $page->id)
+                    ->orderBy('order', 'ASC')
+                    ->get();
+                    foreach($allLinks as $linkKey => $linkItem) {
+                        $linkItem->order = $linkItem;
+                        $linkItem->save();
+            }
+                  return redirect('/admin/'.$page->slug.'/links');
+
+
+              }
+
+            }
+
+            return redirect('/admin');
+
+    }
+
 public function pageDesign($slug) {
     return view('admin/page_design',  [
         'menu' => 'design'
