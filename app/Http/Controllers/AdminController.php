@@ -109,6 +109,62 @@ public function pageLinks($slug) {
     }
 }
 
+    public function linkOrderUpdate($linkid, $pos) {
+        $user = Auth::user();
+
+        $link = Link::find($linkid);
+
+        $myPages = [];
+        $myPagesQuery = Page::where('id_user', $user->id)->get();
+        foreach($myPagesQuery as $pageItem) {
+            $myPages[] = $pageItem->id;
+        }
+
+        if(in_array($link->id_page, $myPages)) {
+
+            if($link->order > $pos) {
+                //subiu item
+                // jogando os próximos para baixo
+                $afterLinks = Link::where('id_page', $link->id_page)
+                ->where('order', '>=', $pos)
+                ->get();
+                foreach($afterLinks as $afterLink) {
+                    $afterLink->order++;
+                    $afterLink->save();
+
+                }
+            } elseif($link->order < $pos) {
+                // desceu item
+                // jogando os anteriores para cima
+                $beforeLinks = Link::where('id_page', $link->id_page)
+                ->where('order', '<=', $pos)
+                ->get();
+                foreach($beforeLinks as $beforeLink) {
+                    $beforeLink->order--;
+                    $beforeLink->save();
+
+                }
+            }
+
+            //posicionando o item
+            $link->order = $pos;
+            $link->save();
+
+
+            //corrigindo as posições 
+            $allLinks = Link::where('id_page', $link->id_page)
+            ->orderBy('order', 'ASC')
+            ->get();
+            foreach($allLinks as $linkKey => $linkItem) {
+                $linkItem->order = $linkItem;
+                $linkItem->save();
+            }
+
+        }
+
+        return [];
+    }
+
 public function pageDesign($slug) {
     return view('admin/page_design',  [
         'menu' => 'design'
