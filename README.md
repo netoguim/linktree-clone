@@ -5,10 +5,10 @@
 ## :camera: Demonstração
 
 <div align="center" >
-  <img src="./git_img/page.png" height="400">
-  <img src="./git_img/links.png" height="400">
-  <img src="./git_img/edit_link.png" height="400">
-  <img src="./git_img/my_pages.png" height="400">
+  <img src="./git_img/Pages.png" height="400">
+  <img src="./git_img/Links.png" height="400">
+  <img src="./git_img/Painel.png" height="400">
+  <img src="./git_img/editar.png" height="400">
   <img src="./git_img/login.png" height="400">
   <img src="./git_img/register.png" height="400">
 </div><br/>
